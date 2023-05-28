@@ -3,12 +3,12 @@ version: '3'
 services:
   database:
     image: mariadb:10.7.3
-    container_name: freereads_database
+    container_name: freedreads_database
     restart: unless-stopped
     environment:
       MARIADB_USER: root
       MARIADB_ROOT_PASSWORD: root
-      MARIADB_DATABASE: freereads
+      MARIADB_DATABASE: symfony_db
       MARIADB_ALLOW_EMPTY_ROOT_PASSWORD: 'no'
     volumes:
       - database-data:/var/lib/mysql:rw
@@ -18,7 +18,7 @@ services:
 
   web:
     image: nginx:alpine
-    container_name: freereads_nginx
+    container_name: freedreads_nginx
     restart: unless-stopped
     ports:
       - "8000:80"
@@ -30,7 +30,7 @@ services:
 
   php:
     user: '${USER_ID}:${GROUP_ID}'
-    container_name: freereads_php
+    container_name: freedreads_php
     restart: unless-stopped
     build:
       context: ./tools/docker/php
@@ -41,7 +41,7 @@ services:
 
   redis:
     image: redis:6-alpine
-    container_name: freereads_redis
+    container_name: freedreads_redis
     restart: unless-stopped
     labels:
       com.symfony.server.service-prefix: 'REDIS'
@@ -49,7 +49,7 @@ services:
   ## Development Tools
   maildev:
     image: maildev/maildev:2.0.2
-    container_name: freereads_maildev
+    container_name: freedreads_maildev
     restart: unless-stopped
     command: bin/maildev --web 80 --smtp 25 --hide-extensions STARTTLS
     ports:
@@ -59,7 +59,7 @@ services:
 
   adminer:
     image: adminer:4.8.1
-    container_name: freereads_adminer
+    container_name: freedreads_adminer
     restart: unless-stopped
     depends_on:
       - database
@@ -71,7 +71,7 @@ services:
       - "8082:8080"
 
   node:
-    container_name: freereads_node
+    container_name: freedreads_node
     restart: unless-stopped
     user: '${USER_ID}:${GROUP_ID}'
     build:
