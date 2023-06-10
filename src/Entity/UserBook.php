@@ -7,6 +7,7 @@ use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: UserBookRepository::class)]
+#[ORM\HasLifecycleCallbacks]
 class UserBook
 {
     #[ORM\Id]
@@ -34,6 +35,18 @@ class UserBook
 
     #[ORM\ManyToOne(inversedBy: 'userBooks')]
     private ?Status $status = null;
+
+    public function __construct()
+    {
+        $this->created_at = new \DateTimeImmutable();
+        $this->updated_at = new \DateTimeImmutable();
+    }
+
+    #[ORM\PreUpdate]
+    public function preUpdate(): void
+    {
+        $this->updated_at = new \DateTimeImmutable();
+    }
 
     public function getId(): ?int
     {
