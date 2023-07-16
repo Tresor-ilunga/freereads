@@ -25,6 +25,33 @@ class AppFixtures extends Fixture
     {
         $faker = Factory::create('fr_FR');
 
+        // Create 10 Users
+        $admin = new User();
+        $admin
+            ->setPseudo('Admin')
+            ->setEmail('admin@admin.com')
+            ->setRoles(['ROLE_USER', 'ROLE_ADMIN'])
+            ->setPlainPassword('password');
+
+        $users[] = $admin;
+        $manager->persist($admin);
+
+
+        $users = [];
+        for ($i = 0; $i < 10; $i++)
+        {
+            $user = new User();
+            $user
+                ->setEmail($faker->email)
+                ->setPassword($faker->password)
+                ->setPseudo($faker->userName)
+                ->setRoles(['ROLE_USER'])
+                ->setPlainPassword('password');
+
+            $manager->persist($user);
+            $users[] = $user;
+        }
+
         // Create of 10 Authors
         $authors = [];
 
@@ -81,20 +108,6 @@ class AppFixtures extends Fixture
 
             $manager->persist($book);
             $books[] = $book;
-        }
-
-        // Create 10 Users
-        $users = [];
-        for ($i = 0; $i < 10; $i++)
-        {
-            $user = new User();
-            $user
-                ->setEmail($faker->email)
-                ->setPassword($faker->password)
-                ->setPseudo($faker->userName);
-
-            $manager->persist($user);
-            $users[] = $user;
         }
 
         // Create 10 UserBook by User

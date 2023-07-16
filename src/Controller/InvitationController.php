@@ -63,7 +63,7 @@ class InvitationController extends AbstractController
             return $this->redirectToRoute('admin');
         }
 
-        return $this->render('invitation/index.html.twig', [
+        return $this->render('registration/register.html.twig', [
             'registrationForm' => $form->createView(),
         ]);
     }
