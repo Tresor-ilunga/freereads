@@ -16,6 +16,9 @@ class StatusCrudController extends AbstractCrudController
 {
     use Trait\ReadOnlyTrait;
 
+    /**
+     * @return string
+     */
     public static function getEntityFqcn(): string
     {
         return Status::class;

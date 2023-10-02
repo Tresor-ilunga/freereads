@@ -15,6 +15,12 @@ use EasyCorp\Bundle\EasyAdminBundle\Config\Crud;
  */
 trait CreateReadDeleteTrait
 {
+    /**
+     * This method is used to configure the main CRUD controller for this entity.
+     *
+     * @param Actions $actions
+     * @return Actions
+     */
     public function configureActions(Actions $actions): Actions
     {
         return $actions

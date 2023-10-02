@@ -15,6 +15,12 @@ use EasyCorp\Bundle\EasyAdminBundle\Config\Crud;
  */
 trait ReadOnlyTrait
 {
+    /**
+     * This method is called for all pages (index, detail, edit, new, delete, search)
+     *
+     * @param Actions $actions
+     * @return Actions
+     */
     public function configureActions(Actions $actions): Actions
     {
         $actions

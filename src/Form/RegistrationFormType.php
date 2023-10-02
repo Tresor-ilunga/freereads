@@ -47,6 +47,12 @@ class RegistrationFormType extends AbstractType
         ;
     }
 
+    /**
+     * This method is used to configure the options for this type.
+     *
+     * @param OptionsResolver $resolver
+     * @return void
+     */
     public function configureOptions(OptionsResolver $resolver): void
     {
         $resolver->setDefaults([

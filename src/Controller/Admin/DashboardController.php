@@ -28,6 +28,8 @@ use Symfony\Component\Routing\Annotation\Route;
 class DashboardController extends AbstractDashboardController
 {
     /**
+     * This method is called for each page loaded by EasyAdmin.
+     *
      * @throws ContainerExceptionInterface
      * @throws NotFoundExceptionInterface
      */
@@ -38,12 +40,20 @@ class DashboardController extends AbstractDashboardController
         return  $this->redirect($adminUrlGenerator->setController(BookCrudController::class)->generateUrl());
     }
 
+    /**
+     * @return Dashboard
+     */
     public function configureDashboard(): Dashboard
     {
         return Dashboard::new()
             ->setTitle('Freereads');
     }
 
+    /**
+     * This method is called for each page loaded by EasyAdmin.
+     *
+     * @return iterable
+     */
     public function configureMenuItems(): iterable
     {
         yield MenuItem::linkToCrud('Books', 'fas fa-book', Book::class);

@@ -32,6 +32,12 @@ class AppAuthenticator extends AbstractLoginFormAuthenticator
     {
     }
 
+    /**
+     * This method is called on every request, and its job is to read the authentication credentials from the request
+     *
+     * @param Request $request
+     * @return Passport
+     */
     public function authenticate(Request $request): Passport
     {
         $email = $request->request->get('email', '');
@@ -47,6 +53,14 @@ class AppAuthenticator extends AbstractLoginFormAuthenticator
         );
     }
 
+    /**
+     * This method is called when authentication executed and was successful!
+     *
+     * @param Request $request
+     * @param TokenInterface $token
+     * @param string $firewallName
+     * @return Response|null
+     */
     public function onAuthenticationSuccess(Request $request, TokenInterface $token, string $firewallName): ?Response
     {
         if ($targetPath = $this->getTargetPath($request->getSession(), $firewallName)) {
@@ -56,6 +70,12 @@ class AppAuthenticator extends AbstractLoginFormAuthenticator
         return new RedirectResponse($this->urlGenerator->generate('app_profile'));
     }
 
+    /**
+     * This method is called when the user tries to access a protected URL without being logged in (i.e., when the
+     *
+     * @param Request $request
+     * @return string
+     */
     protected function getLoginUrl(Request $request): string
     {
         return $this->urlGenerator->generate(self::LOGIN_ROUTE);

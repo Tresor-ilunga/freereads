@@ -16,6 +16,9 @@ use Symfony\Component\Uid\Uuid;
  */
 class EasyAdminSubscriber implements EventSubscriberInterface
 {
+    /**
+     * @return array[]
+     */
     public static function getSubscribedEvents(): array
     {
         return [
@@ -23,7 +26,13 @@ class EasyAdminSubscriber implements EventSubscriberInterface
         ];
     }
 
-    public function setUuid(BeforeEntityPersistedEvent $event)
+    /**
+     * This method is called before persisting an entity in the database.
+     *
+     * @param BeforeEntityPersistedEvent $event
+     * @return void
+     */
+    public function setUuid(BeforeEntityPersistedEvent $event): void
     {
         $entity = $event->getEntityInstance();
 

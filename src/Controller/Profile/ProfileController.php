@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace App\Controller\Profile;
 
-use App\Security\GoogleBooksApiService;
+use App\Service\GoogleBooksApiService;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -27,6 +27,9 @@ class ProfileController extends AbstractController
     {
     }
 
+    /**
+     * @return Response
+     */
     #[Route('/', name: 'index')]
     public function index(): Response
     {
@@ -46,6 +49,8 @@ class ProfileController extends AbstractController
     }
 
     /**
+     * This method is used to search books from Google Books API
+     *
      * @throws TransportExceptionInterface
      * @throws ServerExceptionInterface
      * @throws RedirectionExceptionInterface

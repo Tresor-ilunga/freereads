@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace App\Security;
+namespace App\Service;
 
 use Symfony\Contracts\HttpClient\Exception\ClientExceptionInterface;
 use Symfony\Contracts\HttpClient\Exception\DecodingExceptionInterface;
@@ -23,6 +23,8 @@ class GoogleBooksApiService
     }
 
     /**
+     * This method will return an array of books
+     *
      * @throws TransportExceptionInterface
      * @throws ServerExceptionInterface
      * @throws RedirectionExceptionInterface
@@ -36,6 +38,8 @@ class GoogleBooksApiService
     }
 
     /**
+     * This method will return an array of books
+     *
      * @throws TransportExceptionInterface
      * @throws ServerExceptionInterface
      * @throws RedirectionExceptionInterface

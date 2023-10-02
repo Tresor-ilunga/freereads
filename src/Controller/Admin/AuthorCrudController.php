@@ -21,12 +21,21 @@ class AuthorCrudController extends AbstractCrudController
 {
     use Trait\ReadOnlyTrait;
 
+    /**
+     * @return string
+     */
     public static function getEntityFqcn(): string
     {
         return Author::class;
     }
 
 
+    /**
+     * This method is used to configure the CRUD operations of the entity managed by this controller.
+     *
+     * @param string $pageName
+     * @return iterable
+     */
     public function configureFields(string $pageName): iterable
     {
         return [

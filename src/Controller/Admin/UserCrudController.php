@@ -21,12 +21,21 @@ class UserCrudController extends AbstractCrudController
 {
     use Trait\ReadOnlyTrait;
 
+    /**
+     * @return string
+     */
     public static function getEntityFqcn(): string
     {
         return User::class;
     }
 
 
+    /**
+     * This method is used to configure the fields of the entity
+     *
+     * @param string $pageName
+     * @return iterable
+     */
     public function configureFields(string $pageName): iterable
     {
         return [

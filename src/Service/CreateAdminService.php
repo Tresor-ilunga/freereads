@@ -18,6 +18,13 @@ class CreateAdminService
     public function __construct(private readonly UserRepository $userRepository, private readonly UserPasswordHasherInterface $passwordHasher)
     {}
 
+    /**
+     * This method create an admin user if not exist
+     *
+     * @param string $email
+     * @param string $password
+     * @return void
+     */
     public function create(string $email, string $password): void
     {
         $user = $this->userRepository->findOneBy(['email' => $email]);

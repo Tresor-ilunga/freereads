@@ -20,12 +20,23 @@ class BookCrudController extends AbstractCrudController
 {
     use Trait\ReadOnlyTrait;
 
+    /**
+     * This method is used to return the entity class name
+     *
+     * @return string
+     */
     public static function getEntityFqcn(): string
     {
         return Book::class;
     }
 
 
+    /**
+     * This method is used to configure the fields of the entity
+     *
+     * @param string $pageName
+     * @return iterable
+     */
     public function configureFields(string $pageName): iterable
     {
         return [

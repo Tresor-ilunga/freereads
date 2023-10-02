@@ -20,12 +20,21 @@ class PublisherCrudController extends AbstractCrudController
 {
     use Trait\ReadOnlyTrait;
 
+    /**
+     * @return string
+     */
     public static function getEntityFqcn(): string
     {
         return Publisher::class;
     }
 
 
+    /**
+     * This method is used to configure the fields displayed on the edit and new pages.
+     *
+     * @param string $pageName
+     * @return iterable
+     */
     public function configureFields(string $pageName): iterable
     {
         return [

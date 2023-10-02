@@ -28,6 +28,11 @@ class CreateAdminCommand extends Command
         parent::__construct();
     }
 
+    /**
+     * This method is executed before initialize() and configure()
+     *
+     * @return void
+     */
     protected function configure(): void
     {
         $this
@@ -35,6 +40,13 @@ class CreateAdminCommand extends Command
             ->addArgument('password', InputArgument::REQUIRED, 'Password of the admin user');
     }
 
+    /**
+     * This method is executed after interact() and initialize()
+     *
+     * @param InputInterface $input
+     * @param OutputInterface $output
+     * @return int
+     */
     protected function execute(InputInterface $input, OutputInterface $output): int
     {
         $io = new SymfonyStyle($input, $output);

@@ -20,11 +20,20 @@ class InvitationCrudController extends AbstractCrudController
 {
     use CreateReadDeleteTrait;
 
+    /**
+     * @return string
+     */
     public static function getEntityFqcn(): string
     {
         return Invitation::class;
     }
 
+    /**
+     * This method is used to configure the CRUD operations of the controller.
+     *
+     * @param string $pageName
+     * @return iterable
+     */
     public function configureFields(string $pageName): iterable
     {
         return [
