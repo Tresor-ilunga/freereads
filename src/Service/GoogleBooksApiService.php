@@ -23,6 +23,18 @@ class GoogleBooksApiService
     }
 
     /**
+     * @throws TransportExceptionInterface
+     * @throws ServerExceptionInterface
+     * @throws RedirectionExceptionInterface
+     * @throws DecodingExceptionInterface
+     * @throws ClientExceptionInterface
+     */
+    public function get(string $id): array
+    {
+        return $this->makeRequest('GET', 'volumes/' . $id);
+    }
+
+    /**
      * This method will return an array of books
      *
      * @throws TransportExceptionInterface

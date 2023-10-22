@@ -4,7 +4,9 @@ declare(strict_types=1);
 
 namespace App\Controller\Profile;
 
+use App\Entity\UserBook;
 use App\Service\GoogleBooksApiService;
+use App\Service\ProfileService;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -23,7 +25,10 @@ use Symfony\Contracts\HttpClient\Exception\TransportExceptionInterface;
 #[Route('/profile', name: 'app_profile_', methods: ['GET'])]
 class ProfileController extends AbstractController
 {
-    public function __construct(private readonly GoogleBooksApiService $googleBooksApiService)
+    public function __construct(
+        private readonly GoogleBooksApiService $googleBooksApiService,
+        private readonly ProfileService $profileService
+    )
     {
     }
 
@@ -68,4 +73,33 @@ class ProfileController extends AbstractController
                'search' => $this->googleBooksApiService->search($search),
            ]);
     }
+
+    /**
+     * @throws TransportExceptionInterface
+     * @throws ServerExceptionInterface
+     * @throws RedirectionExceptionInterface
+     * @throws DecodingExceptionInterface
+     * @throws ClientExceptionInterface
+     */
+    #[Route('/search/add/{id}', name: 'search_add', methods: ['GET'])]
+    public function searchAdd(string $id): Response
+    {
+        $userBook = $this->profileService->addBookToProfile($this->getUser(), $id);
+
+        return $this->redirectToRoute('app_profile_my_books', [
+            'id' => $userBook->getId(),
+        ]);
+
+    }
+
+    #[Route('/my-books/{id}', name: 'my_books')]
+    public function showOneBook(UserBook $userBook): Response
+    {
+        return $this->render(
+            view: 'profile/show_one_book.html.twig',
+            parameters: [
+                'userBook' => $userBook,
+            ]);
+    }
+
 }
