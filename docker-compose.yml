@@ -75,7 +75,7 @@ services:
       - ./:/home/node/app
     ports:
       - "3000:3000"
-  app-blog:
+  freedreads:
     image: 'mysql:latest'
     environment:
       MYSQL_ROOT_PASSWORD: password
